@@ -7,13 +7,16 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
-import Pagination from '@mui/material/Pagination';
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
 
 const Countries = () => {
     const [countries, setCountries] = useState([]);
     const [loading, setLoading] = useState(false);
+    
+    //For pagination:
     const [currentPage, setCurrentPage] = useState(1);
-    const [countriesPerPage, setCountryPerPage] = useState(20);
+    const [countriesPerPage, setCountriesPerPage] = useState(20);
 
     useEffect(() => {
         const fetchCountries = async () => {
@@ -29,6 +32,8 @@ const Countries = () => {
     const indexOfLastCountry = currentPage * countriesPerPage;
     const indexOfFirstCountry = indexOfLastCountry - countriesPerPage;
     const currentCountries = countries.slice(indexOfFirstCountry, indexOfLastCountry);
+
+    
     
     return (
         <Container fixed>
@@ -45,7 +50,10 @@ const Countries = () => {
                     md={12} 
                     lg={12}
                 >
-                ...Button....
+                    <ButtonGroup variant="contained" aria-label="outlined primary button group">
+                        <Button>⬆</Button>
+                        <Button>⬇</Button>
+                    </ButtonGroup>
                 </Grid>
                 {currentCountries.map((country) => (
                     <Grid 
@@ -73,7 +81,6 @@ const Countries = () => {
                     </Grid>
                 ))}
             </Grid>
-            <Pagination count={10} color="primary" />
         </Container>
     )
 };
